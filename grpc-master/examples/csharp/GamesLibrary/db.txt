@@ -1,0 +1,8 @@
+CREATE DATABASE GamesDatabase CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+CREATE TABLE `games` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`price` INT DEFAULT 0,
+	PRIMARY KEY (`id`)
+);
