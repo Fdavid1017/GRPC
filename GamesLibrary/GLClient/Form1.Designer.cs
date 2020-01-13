@@ -30,6 +30,8 @@
     {
             this.loginButton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
+            this.getAllGamesButton = new System.Windows.Forms.Button();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // loginButton
@@ -52,11 +54,32 @@
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
+            // getAllGamesButton
+            // 
+            this.getAllGamesButton.Location = new System.Drawing.Point(13, 42);
+            this.getAllGamesButton.Name = "getAllGamesButton";
+            this.getAllGamesButton.Size = new System.Drawing.Size(155, 23);
+            this.getAllGamesButton.TabIndex = 2;
+            this.getAllGamesButton.Text = "Get All Game";
+            this.getAllGamesButton.UseVisualStyleBackColor = true;
+            this.getAllGamesButton.Click += new System.EventHandler(this.GetAllGamesButton_Click);
+            // 
+            // resultLabel
+            // 
+            this.resultLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.resultLabel.Location = new System.Drawing.Point(524, 9);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(264, 432);
+            this.resultLabel.TabIndex = 3;
+            this.resultLabel.Text = "Results:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.resultLabel);
+            this.Controls.Add(this.getAllGamesButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.loginButton);
             this.Name = "Form1";
@@ -69,6 +92,8 @@
 
     private System.Windows.Forms.Button loginButton;
     private System.Windows.Forms.Button logoutButton;
-  }
+        private System.Windows.Forms.Button getAllGamesButton;
+        private System.Windows.Forms.Label resultLabel;
+    }
 }
 
