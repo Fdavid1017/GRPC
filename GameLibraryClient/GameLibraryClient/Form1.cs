@@ -21,18 +21,31 @@ namespace GameLibraryClient
         public Form1()
         {
             InitializeComponent();
+            userPasswordTextBox.PasswordChar = '*';
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            User user = new User();
-            user.Name = "u";
-            user.Passwd = "p";
+            if (!InvalidInputs())
+            {
+                MessageBox.Show("Invalid inputs");
+                return;
+            }
+
+            User user = new User { Name = userNameTextBox.Text, Passwd = userPasswordTextBox.Text };
             Session_Id guid = new Session_Id();
             this.guid = client.Login(user);
+
+            if (this.guid.Id == "NOT_FOUND")
+            {
+                MessageBox.Show("No user found with this name and password pair!");
+                return;
+            }
+
             MessageBox.Show("Logged in\nSessiond id:\n" + this.guid.Id);
             loggedInLabel.Text = "Logged in";
             loggedInLabel.ForeColor = Color.Green;
+            registerGroupBox.Visible = false;
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -43,6 +56,9 @@ namespace GameLibraryClient
             this.guid = new Session_Id();
             loggedInLabel.Text = "Not logged in";
             loggedInLabel.ForeColor = Color.Red;
+            registerGroupBox.Visible = true;
+            userNameTextBox.Text = "";
+            userPasswordTextBox.Text = "";
         }
 
         private async void GetAllButton_Click(object sender, EventArgs e)
@@ -92,6 +108,25 @@ namespace GameLibraryClient
         private void ModifyVisualizeButton_Click(object sender, EventArgs e)
         {
             modifyGroupBox.Visible = true;
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            if (!InvalidInputs())
+            {
+                MessageBox.Show("Invalid inputs");
+                return;
+            }
+
+            User user = new User { Name = userNameTextBox.Text, Passwd = userPasswordTextBox.Text };
+            Result res = new Result();
+            res = client.Register(user);
+            MessageBox.Show(res.Success);
+        }
+
+        bool InvalidInputs()
+        {
+            return userNameTextBox.Text != "" || userPasswordTextBox.Text != "";
         }
     }
 }

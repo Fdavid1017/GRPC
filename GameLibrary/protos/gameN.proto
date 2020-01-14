@@ -9,6 +9,7 @@ service GamesLibrary{
   rpc DeleteGame(GameID) returns (Result) {}
   rpc Login(User) returns (Session_Id) {}
   rpc Logout(Session_Id) returns (Result) {}
+  rpc Register(User) returns (Result) {}
 }
 message User {
   string name=1;

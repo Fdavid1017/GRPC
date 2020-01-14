@@ -54,6 +54,12 @@
             this.deleteVisualizeButton = new System.Windows.Forms.Button();
             this.modifyVisualizeButton = new System.Windows.Forms.Button();
             this.loggedInLabel = new System.Windows.Forms.Label();
+            this.registerGroupBox = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.userPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.registerButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gamePriceNumericUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deleteIdNumericUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modifyIdNumericUD)).BeginInit();
@@ -61,13 +67,14 @@
             this.addGroupBox.SuspendLayout();
             this.deleteGroupBox.SuspendLayout();
             this.modifyGroupBox.SuspendLayout();
+            this.registerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(13, 13);
+            this.loginButton.Location = new System.Drawing.Point(80, 75);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(69, 23);
             this.loginButton.TabIndex = 0;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -75,9 +82,9 @@
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(94, 13);
+            this.logoutButton.Location = new System.Drawing.Point(12, 130);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(75, 23);
+            this.logoutButton.Size = new System.Drawing.Size(156, 23);
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Log out";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -85,7 +92,7 @@
             // 
             // getAllButton
             // 
-            this.getAllButton.Location = new System.Drawing.Point(13, 42);
+            this.getAllButton.Location = new System.Drawing.Point(12, 13);
             this.getAllButton.Name = "getAllButton";
             this.getAllButton.Size = new System.Drawing.Size(156, 23);
             this.getAllButton.TabIndex = 2;
@@ -314,7 +321,7 @@
             // 
             // addVisualButton
             // 
-            this.addVisualButton.Location = new System.Drawing.Point(13, 72);
+            this.addVisualButton.Location = new System.Drawing.Point(12, 43);
             this.addVisualButton.Name = "addVisualButton";
             this.addVisualButton.Size = new System.Drawing.Size(156, 23);
             this.addVisualButton.TabIndex = 20;
@@ -324,7 +331,7 @@
             // 
             // deleteVisualizeButton
             // 
-            this.deleteVisualizeButton.Location = new System.Drawing.Point(13, 101);
+            this.deleteVisualizeButton.Location = new System.Drawing.Point(12, 72);
             this.deleteVisualizeButton.Name = "deleteVisualizeButton";
             this.deleteVisualizeButton.Size = new System.Drawing.Size(156, 23);
             this.deleteVisualizeButton.TabIndex = 21;
@@ -334,7 +341,7 @@
             // 
             // modifyVisualizeButton
             // 
-            this.modifyVisualizeButton.Location = new System.Drawing.Point(13, 130);
+            this.modifyVisualizeButton.Location = new System.Drawing.Point(12, 101);
             this.modifyVisualizeButton.Name = "modifyVisualizeButton";
             this.modifyVisualizeButton.Size = new System.Drawing.Size(156, 23);
             this.modifyVisualizeButton.TabIndex = 22;
@@ -353,11 +360,69 @@
             this.loggedInLabel.Text = "Not logged in";
             this.loggedInLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // registerGroupBox
+            // 
+            this.registerGroupBox.Controls.Add(this.registerButton);
+            this.registerGroupBox.Controls.Add(this.userPasswordTextBox);
+            this.registerGroupBox.Controls.Add(this.label8);
+            this.registerGroupBox.Controls.Add(this.userNameTextBox);
+            this.registerGroupBox.Controls.Add(this.label7);
+            this.registerGroupBox.Controls.Add(this.loginButton);
+            this.registerGroupBox.Location = new System.Drawing.Point(12, 160);
+            this.registerGroupBox.Name = "registerGroupBox";
+            this.registerGroupBox.Size = new System.Drawing.Size(156, 111);
+            this.registerGroupBox.TabIndex = 24;
+            this.registerGroupBox.TabStop = false;
+            this.registerGroupBox.Text = "Register/Login";
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(7, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 23);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "User Name:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // userNameTextBox
+            // 
+            this.userNameTextBox.Location = new System.Drawing.Point(80, 22);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(69, 20);
+            this.userNameTextBox.TabIndex = 9;
+            // 
+            // userPasswordTextBox
+            // 
+            this.userPasswordTextBox.Location = new System.Drawing.Point(80, 48);
+            this.userPasswordTextBox.Name = "userPasswordTextBox";
+            this.userPasswordTextBox.Size = new System.Drawing.Size(69, 20);
+            this.userPasswordTextBox.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(7, 46);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 23);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "User Name:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // registerButton
+            // 
+            this.registerButton.Location = new System.Drawing.Point(10, 74);
+            this.registerButton.Name = "registerButton";
+            this.registerButton.Size = new System.Drawing.Size(64, 23);
+            this.registerButton.TabIndex = 12;
+            this.registerButton.Text = "Register";
+            this.registerButton.UseVisualStyleBackColor = true;
+            this.registerButton.Click += new System.EventHandler(this.RegisterButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 338);
+            this.Controls.Add(this.registerGroupBox);
             this.Controls.Add(this.loggedInLabel);
             this.Controls.Add(this.modifyVisualizeButton);
             this.Controls.Add(this.deleteVisualizeButton);
@@ -368,7 +433,6 @@
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.getAllButton);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.loginButton);
             this.Name = "Form1";
             this.Text = "Game Library";
             ((System.ComponentModel.ISupportInitialize)(this.gamePriceNumericUD)).EndInit();
@@ -380,6 +444,8 @@
             this.deleteGroupBox.ResumeLayout(false);
             this.modifyGroupBox.ResumeLayout(false);
             this.modifyGroupBox.PerformLayout();
+            this.registerGroupBox.ResumeLayout(false);
+            this.registerGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -412,6 +478,12 @@
         private System.Windows.Forms.Button deleteVisualizeButton;
         private System.Windows.Forms.Button modifyVisualizeButton;
         private System.Windows.Forms.Label loggedInLabel;
+        private System.Windows.Forms.GroupBox registerGroupBox;
+        private System.Windows.Forms.Button registerButton;
+        private System.Windows.Forms.TextBox userPasswordTextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox userNameTextBox;
+        private System.Windows.Forms.Label label7;
     }
 }
 

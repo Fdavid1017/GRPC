@@ -13,26 +13,26 @@ namespace GameLibraryServer
 {
     class Program
     {
+        static DBConnection gameDatabase = DBConnection.Instance();
+        static DBConnection userDatabase = DBConnection.Instance();
         internal class GamesLibraryImplement : GamesN.GamesLibrary.GamesLibraryBase
         {
-            const string DATABASENAME = "gamesdatabase";
-            DBConnection dbCon = DBConnection.Instance();
             readonly List<string> sessions = new List<string>();
 
             override public Task<Result> AddGame(GameUID request, ServerCallContext context)
             {
                 if (sessions.Contains(request.Uid))
                 {
-                    if (dbCon.IsConnect())
+                    if (gameDatabase.IsConnect())
                     {
                         string query = string.Format("INSERT INTO games (name,price) VALUES (\"{0}\",{1})", request.Name, request.Price);
 
-                        if (dbCon.Connection.State == System.Data.ConnectionState.Closed)
+                        if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
                         {
-                            dbCon.OpenConnection();
+                            gameDatabase.OpenConnection();
                         }
 
-                        MySqlCommand cmd = new MySqlCommand(query, dbCon.Connection);
+                        MySqlCommand cmd = new MySqlCommand(query, gameDatabase.Connection);
                         int reader = cmd.ExecuteNonQuery();
                         if (reader <= 0)
                         {
@@ -40,7 +40,7 @@ namespace GameLibraryServer
                             return Task.FromResult(new Result { Success = "Error occured while inserting into the database!" });
                         }
 
-                        dbCon.Close();
+                        gameDatabase.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Name + " inserted into the database by: " + request.Uid);
                         return Task.FromResult(new Result { Success = request.Name + " succesfully inserted into the database!" });
                     }
@@ -54,23 +54,23 @@ namespace GameLibraryServer
             {
                 if (sessions.Contains(request.Id))
                 {
-                    if (dbCon.IsConnect())
+                    if (gameDatabase.IsConnect())
                     {
                         string query = string.Format("DELETE FROM games WHERE id=" + request.Gid);
 
-                        if (dbCon.Connection.State == System.Data.ConnectionState.Closed)
+                        if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
                         {
-                            dbCon.OpenConnection();
+                            gameDatabase.OpenConnection();
                         }
 
-                        MySqlCommand cmd = new MySqlCommand(query, dbCon.Connection);
+                        MySqlCommand cmd = new MySqlCommand(query, gameDatabase.Connection);
                         int reader = cmd.ExecuteNonQuery();
                         if (reader <= 0)
                         {
                             return Task.FromResult(new Result { Success = string.Format("Nothing found with this id ({0})!", request.Gid) });
                         }
 
-                        dbCon.Close();
+                        gameDatabase.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Gid + " deleted from the database by: " + request.Id);
                         return Task.FromResult(new Result { Success = request.Gid + "  deleted from the database!" });
                     }
@@ -86,23 +86,21 @@ namespace GameLibraryServer
                 {
                     if (sessions.Contains(request.Id))
                     {
-                        var dbCon = DBConnection.Instance();
-                        dbCon.DatabaseName = DATABASENAME;
-                        if (dbCon.IsConnect())
+                        if (gameDatabase.IsConnect())
                         {
                             string query = "SELECT * FROM games ORDER BY id";
-                            if (dbCon.Connection.State == System.Data.ConnectionState.Closed)
+                            if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
                             {
-                                dbCon.OpenConnection();
+                                gameDatabase.OpenConnection();
                             }
-                            var cmd = new MySqlCommand(query, dbCon.Connection);
+                            var cmd = new MySqlCommand(query, gameDatabase.Connection);
                             var reader = cmd.ExecuteReader();
                             while (reader.Read())
                             {
                                 Game game = new Game { Gid = reader.GetInt32(0), Name = reader.GetString(1), Price = reader.GetInt32(2) };
                                 await responseStream.WriteAsync(game);
                             }
-                            dbCon.Close();
+                            gameDatabase.Close();
                             Console.WriteLine(DateTime.Now.ToString() + ": " + "Games list asked by " + request.Id);
                         }
                     }
@@ -115,17 +113,36 @@ namespace GameLibraryServer
 
             override public Task<Session_Id> Login(User user, ServerCallContext context)
             {
-                string id = "";
-                if (user.Name == "u" && user.Passwd == "p")
+                if (userDatabase.IsConnect())
                 {
-                    id = Guid.NewGuid().ToString();
-                    sessions.Add(id);
-                    dbCon.DatabaseName = DATABASENAME;
-                    Console.WriteLine(DateTime.Now.ToString() + ": " + user.Name + " logged in");
-                    return Task.FromResult(new Session_Id { Id = id });
+                    string query = string.Format("SELECT * FROM users WHERE userName=\"{0}\" AND password=\"{1}\"", user.Name, user.Passwd);
+                    if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
+                    {
+                        gameDatabase.OpenConnection();
+                    }
+                    var cmd = new MySqlCommand(query, gameDatabase.Connection);
+                    var reader = cmd.ExecuteReader();
+                    int count = 0;
+                    while (reader.Read() && count < 2)
+                    {
+                        count++;
+                    }
+                    userDatabase.Close();
+
+                    if (count == 1)
+                    {
+                        string id = "";
+                        id = Guid.NewGuid().ToString();
+                        sessions.Add(id);
+                        Console.WriteLine(DateTime.Now.ToString() + ": " + user.Name + " logged in");
+                        return Task.FromResult(new Session_Id { Id = id });
+                    }
+                    else if (count<=0)
+                    {
+                        return Task.FromResult(new Session_Id { Id = "NOT_FOUND" });
+                    }
                 }
-                else
-                    return Task.FromResult(new Session_Id { Id = null });
+                return Task.FromResult(new Session_Id { Id = string.Empty });
             }
 
             override public Task<Result> Logout(Session_Id request, ServerCallContext context)
@@ -147,23 +164,23 @@ namespace GameLibraryServer
             {
                 if (sessions.Contains(request.Uid))
                 {
-                    if (dbCon.IsConnect())
+                    if (gameDatabase.IsConnect())
                     {
                         string query = string.Format("UPDATE games SET name=\"{0}\",price={1} WHERE id={2}", request.Name, request.Price, request.Gid);
 
-                        if (dbCon.Connection.State == System.Data.ConnectionState.Closed)
+                        if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
                         {
-                            dbCon.OpenConnection();
+                            gameDatabase.OpenConnection();
                         }
 
-                        MySqlCommand cmd = new MySqlCommand(query, dbCon.Connection);
+                        MySqlCommand cmd = new MySqlCommand(query, gameDatabase.Connection);
                         int reader = cmd.ExecuteNonQuery();
                         if (reader <= 0)
                         {
                             return Task.FromResult(new Result { Success = string.Format("Nothing found with this id ({0})!", request.Gid) });
                         }
 
-                        dbCon.Close();
+                        gameDatabase.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Gid + " modified by: " + request.Uid);
                         return Task.FromResult(new Result { Success = request.Gid + " modified!" });
                     }
@@ -171,6 +188,32 @@ namespace GameLibraryServer
                     return Task.FromResult(new Result { Success = "Coudn't modifie!" });
                 }
                 return Task.FromResult(new Result { Success = "You are not logged in!" });
+            }
+
+            public override Task<Result> Register(User request, ServerCallContext context)
+            {
+                if (userDatabase.IsConnect())
+                {
+                    string query = string.Format("INSERT INTO users (userName,password) VALUES (\"{0}\",\"{1}\");", request.Name, request.Passwd);
+
+                    if (gameDatabase.Connection.State == System.Data.ConnectionState.Closed)
+                    {
+                        gameDatabase.OpenConnection();
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand(query, gameDatabase.Connection);
+                    int reader = cmd.ExecuteNonQuery();
+                    if (reader <= 0)
+                    {
+                        return Task.FromResult(new Result { Success = string.Format("Couldnt register as {0}!", request.Name) });
+                    }
+
+                    gameDatabase.Close();
+                    Console.WriteLine(DateTime.Now.ToString() + ": " + " Succesfully registered as  " + request.Name + "!");
+                    return Task.FromResult(new Result { Success = "Succesfully registered as  " + request.Name + "!" });
+                }
+                Console.WriteLine(DateTime.Now.ToString() + ": " + "Coudn't modifie!");
+                return Task.FromResult(new Result { Success = "Coudn't modifie!" });
             }
         }
 
@@ -183,6 +226,8 @@ namespace GameLibraryServer
                 Ports = { new ServerPort("localhost", PORT, ServerCredentials.Insecure) }
             };
             server.Start();
+            gameDatabase.DatabaseName = "gamesdatabase";
+            userDatabase.DatabaseName = "gamesdatabase";
             Console.WriteLine("{0}: Server started, port: {1}", DateTime.Now.ToString(), PORT);
             Console.WriteLine("Press ENTER to stop the server...");
             Console.WriteLine();

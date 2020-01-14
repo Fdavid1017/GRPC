@@ -62,6 +62,13 @@ namespace GamesN {
         __Marshaller_gamesN_Session_Id,
         __Marshaller_gamesN_Result);
 
+    static readonly grpc::Method<global::GamesN.User, global::GamesN.Result> __Method_Register = new grpc::Method<global::GamesN.User, global::GamesN.Result>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Register",
+        __Marshaller_gamesN_User,
+        __Marshaller_gamesN_Result);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -98,6 +105,11 @@ namespace GamesN {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::GamesN.Result> Logout(global::GamesN.Session_Id request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::GamesN.Result> Register(global::GamesN.User request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -215,6 +227,22 @@ namespace GamesN {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Logout, null, options, request);
       }
+      public virtual global::GamesN.Result Register(global::GamesN.User request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Register(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::GamesN.Result Register(global::GamesN.User request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Register, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> RegisterAsync(global::GamesN.User request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RegisterAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> RegisterAsync(global::GamesN.User request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Register, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GamesLibraryClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -232,7 +260,8 @@ namespace GamesN {
           .AddMethod(__Method_AddGame, serviceImpl.AddGame)
           .AddMethod(__Method_DeleteGame, serviceImpl.DeleteGame)
           .AddMethod(__Method_Login, serviceImpl.Login)
-          .AddMethod(__Method_Logout, serviceImpl.Logout).Build();
+          .AddMethod(__Method_Logout, serviceImpl.Logout)
+          .AddMethod(__Method_Register, serviceImpl.Register).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -247,6 +276,7 @@ namespace GamesN {
       serviceBinder.AddMethod(__Method_DeleteGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameID, global::GamesN.Result>(serviceImpl.DeleteGame));
       serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.User, global::GamesN.Session_Id>(serviceImpl.Login));
       serviceBinder.AddMethod(__Method_Logout, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.Session_Id, global::GamesN.Result>(serviceImpl.Logout));
+      serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.User, global::GamesN.Result>(serviceImpl.Register));
     }
 
   }
