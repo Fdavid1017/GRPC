@@ -40,6 +40,7 @@ namespace GameLibraryServer
                             return Task.FromResult(new Result { Success = "Error occured while inserting into the database!" });
                         }
 
+                        dbCon.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Name + " inserted into the database by: " + request.Uid);
                         return Task.FromResult(new Result { Success = request.Name + " succesfully inserted into the database!" });
                     }
@@ -69,6 +70,7 @@ namespace GameLibraryServer
                             return Task.FromResult(new Result { Success = string.Format("Nothing found with this id ({0})!", request.Gid) });
                         }
 
+                        dbCon.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Gid + " deleted from the database by: " + request.Id);
                         return Task.FromResult(new Result { Success = request.Gid + "  deleted from the database!" });
                     }
@@ -80,23 +82,34 @@ namespace GameLibraryServer
 
             override public async Task GetGames(Session_Id request, IServerStreamWriter<Game> responseStream, ServerCallContext context)
             {
-                if (sessions.Contains(request.Id))
+                try
                 {
-                    var dbCon = DBConnection.Instance();
-                    dbCon.DatabaseName = DATABASENAME;
-                    if (dbCon.IsConnect())
+                    if (sessions.Contains(request.Id))
                     {
-                        string query = "SELECT * FROM games ORDER BY id";
-                        var cmd = new MySqlCommand(query, dbCon.Connection);
-                        var reader = cmd.ExecuteReader();
-                        while (reader.Read())
+                        var dbCon = DBConnection.Instance();
+                        dbCon.DatabaseName = DATABASENAME;
+                        if (dbCon.IsConnect())
                         {
-                            Game game = new Game { Gid = reader.GetInt32(0), Name = reader.GetString(1), Price = reader.GetInt32(2) };
-                            await responseStream.WriteAsync(game);
+                            string query = "SELECT * FROM games ORDER BY id";
+                            if (dbCon.Connection.State == System.Data.ConnectionState.Closed)
+                            {
+                                dbCon.OpenConnection();
+                            }
+                            var cmd = new MySqlCommand(query, dbCon.Connection);
+                            var reader = cmd.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                Game game = new Game { Gid = reader.GetInt32(0), Name = reader.GetString(1), Price = reader.GetInt32(2) };
+                                await responseStream.WriteAsync(game);
+                            }
+                            dbCon.Close();
+                            Console.WriteLine(DateTime.Now.ToString() + ": " + "Games list asked by " + request.Id);
                         }
-                        dbCon.Close();
-                        Console.WriteLine(DateTime.Now.ToString() + ": " + "Games list asked by " + request.Id);
                     }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -150,6 +163,7 @@ namespace GameLibraryServer
                             return Task.FromResult(new Result { Success = string.Format("Nothing found with this id ({0})!", request.Gid) });
                         }
 
+                        dbCon.Close();
                         Console.WriteLine(DateTime.Now.ToString() + ": " + request.Gid + " modified by: " + request.Uid);
                         return Task.FromResult(new Result { Success = request.Gid + " modified!" });
                     }

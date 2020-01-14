@@ -25,7 +25,9 @@ namespace GameLibraryClient
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            User user = new User(); user.Name = "u"; user.Passwd = "p";
+            User user = new User();
+            user.Name = "u";
+            user.Passwd = "p";
             Session_Id guid = new Session_Id();
             this.guid = client.Login(user);
             MessageBox.Show("Logged in\nSessiond id:\n" + this.guid.Id);
@@ -49,7 +51,7 @@ namespace GameLibraryClient
             IAsyncStreamReader<Game> response = client.GetGames(guid).ResponseStream;
             while (await response.MoveNext())
             {
-                resultLabel.Text += response.Current.ToString() + "\n";
+                resultLabel.Text += string.Format("Id: {0}  Name: {1}   Price:{2}\n", response.Current.Gid, response.Current.Name, response.Current.Price);
             }
         }
 
