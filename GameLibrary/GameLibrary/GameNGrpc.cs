@@ -14,9 +14,10 @@ namespace GamesN {
 
     static readonly grpc::Marshaller<global::GamesN.Session_Id> __Marshaller_gamesN_Session_Id = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.Session_Id.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::GamesN.Game> __Marshaller_gamesN_Game = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.Game.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GamesN.GameID> __Marshaller_gamesN_GameID = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.GameID.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GamesN.GameUID> __Marshaller_gamesN_GameUID = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.GameUID.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GamesN.GameIdUid> __Marshaller_gamesN_GameIdUid = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.GameIdUid.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::GamesN.Result> __Marshaller_gamesN_Result = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.Result.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GamesN.GameUID> __Marshaller_gamesN_GameUID = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.GameUID.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GamesN.GameID> __Marshaller_gamesN_GameID = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.GameID.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::GamesN.User> __Marshaller_gamesN_User = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GamesN.User.Parser.ParseFrom);
 
     static readonly grpc::Method<global::GamesN.Session_Id, global::GamesN.Game> __Method_GetGames = new grpc::Method<global::GamesN.Session_Id, global::GamesN.Game>(
@@ -26,12 +27,12 @@ namespace GamesN {
         __Marshaller_gamesN_Session_Id,
         __Marshaller_gamesN_Game);
 
-    static readonly grpc::Method<global::GamesN.GameID, global::GamesN.Game> __Method_ModifyGame = new grpc::Method<global::GamesN.GameID, global::GamesN.Game>(
+    static readonly grpc::Method<global::GamesN.GameIdUid, global::GamesN.Result> __Method_ModifyGame = new grpc::Method<global::GamesN.GameIdUid, global::GamesN.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "ModifyGame",
-        __Marshaller_gamesN_GameID,
-        __Marshaller_gamesN_Game);
+        __Marshaller_gamesN_GameIdUid,
+        __Marshaller_gamesN_Result);
 
     static readonly grpc::Method<global::GamesN.GameUID, global::GamesN.Result> __Method_AddGame = new grpc::Method<global::GamesN.GameUID, global::GamesN.Result>(
         grpc::MethodType.Unary,
@@ -40,11 +41,11 @@ namespace GamesN {
         __Marshaller_gamesN_GameUID,
         __Marshaller_gamesN_Result);
 
-    static readonly grpc::Method<global::GamesN.GameUID, global::GamesN.Result> __Method_DeleteGame = new grpc::Method<global::GamesN.GameUID, global::GamesN.Result>(
+    static readonly grpc::Method<global::GamesN.GameID, global::GamesN.Result> __Method_DeleteGame = new grpc::Method<global::GamesN.GameID, global::GamesN.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteGame",
-        __Marshaller_gamesN_GameUID,
+        __Marshaller_gamesN_GameID,
         __Marshaller_gamesN_Result);
 
     static readonly grpc::Method<global::GamesN.User, global::GamesN.Session_Id> __Method_Login = new grpc::Method<global::GamesN.User, global::GamesN.Session_Id>(
@@ -76,7 +77,7 @@ namespace GamesN {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::GamesN.Game> ModifyGame(global::GamesN.GameID request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::GamesN.Result> ModifyGame(global::GamesN.GameIdUid request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -86,7 +87,7 @@ namespace GamesN {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::GamesN.Result> DeleteGame(global::GamesN.GameUID request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::GamesN.Result> DeleteGame(global::GamesN.GameID request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -134,19 +135,19 @@ namespace GamesN {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetGames, null, options, request);
       }
-      public virtual global::GamesN.Game ModifyGame(global::GamesN.GameID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::GamesN.Result ModifyGame(global::GamesN.GameIdUid request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ModifyGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GamesN.Game ModifyGame(global::GamesN.GameID request, grpc::CallOptions options)
+      public virtual global::GamesN.Result ModifyGame(global::GamesN.GameIdUid request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ModifyGame, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GamesN.Game> ModifyGameAsync(global::GamesN.GameID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> ModifyGameAsync(global::GamesN.GameIdUid request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ModifyGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GamesN.Game> ModifyGameAsync(global::GamesN.GameID request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> ModifyGameAsync(global::GamesN.GameIdUid request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ModifyGame, null, options, request);
       }
@@ -166,19 +167,19 @@ namespace GamesN {
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddGame, null, options, request);
       }
-      public virtual global::GamesN.Result DeleteGame(global::GamesN.GameUID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::GamesN.Result DeleteGame(global::GamesN.GameID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GamesN.Result DeleteGame(global::GamesN.GameUID request, grpc::CallOptions options)
+      public virtual global::GamesN.Result DeleteGame(global::GamesN.GameID request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteGame, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> DeleteGameAsync(global::GamesN.GameUID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> DeleteGameAsync(global::GamesN.GameID request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> DeleteGameAsync(global::GamesN.GameUID request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::GamesN.Result> DeleteGameAsync(global::GamesN.GameID request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteGame, null, options, request);
       }
@@ -241,9 +242,9 @@ namespace GamesN {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GamesLibraryBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_GetGames, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GamesN.Session_Id, global::GamesN.Game>(serviceImpl.GetGames));
-      serviceBinder.AddMethod(__Method_ModifyGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameID, global::GamesN.Game>(serviceImpl.ModifyGame));
+      serviceBinder.AddMethod(__Method_ModifyGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameIdUid, global::GamesN.Result>(serviceImpl.ModifyGame));
       serviceBinder.AddMethod(__Method_AddGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameUID, global::GamesN.Result>(serviceImpl.AddGame));
-      serviceBinder.AddMethod(__Method_DeleteGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameUID, global::GamesN.Result>(serviceImpl.DeleteGame));
+      serviceBinder.AddMethod(__Method_DeleteGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.GameID, global::GamesN.Result>(serviceImpl.DeleteGame));
       serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.User, global::GamesN.Session_Id>(serviceImpl.Login));
       serviceBinder.AddMethod(__Method_Logout, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GamesN.Session_Id, global::GamesN.Result>(serviceImpl.Logout));
     }

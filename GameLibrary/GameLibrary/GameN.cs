@@ -28,16 +28,17 @@ namespace GamesN {
             "CgZwYXNzd2QYAiABKAkiGAoKU2Vzc2lvbl9JZBIKCgJpZBgBIAEoCSIZCgZS",
             "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCSIwCgRHYW1lEgsKA2dpZBgBIAEoBRIM",
             "CgRuYW1lGAIgASgJEg0KBXByaWNlGAMgASgFIiEKBkdhbWVJRBIKCgJpZBgB",
-            "IAEoBRILCgNnaWQYAiABKAUiQAoHR2FtZVVJRBILCgN1aWQYASABKAkSCwoD",
-            "Z0lEGAIgASgFEgwKBG5hbWUYAyABKAkSDQoFcHJpY2UYBCABKAUyqgIKDEdh",
-            "bWVzTGlicmFyeRIwCghHZXRHYW1lcxISLmdhbWVzTi5TZXNzaW9uX0lkGgwu",
-            "Z2FtZXNOLkdhbWUiADABEiwKCk1vZGlmeUdhbWUSDi5nYW1lc04uR2FtZUlE",
-            "GgwuZ2FtZXNOLkdhbWUiABIsCgdBZGRHYW1lEg8uZ2FtZXNOLkdhbWVVSUQa",
-            "Di5nYW1lc04uUmVzdWx0IgASLwoKRGVsZXRlR2FtZRIPLmdhbWVzTi5HYW1l",
-            "VUlEGg4uZ2FtZXNOLlJlc3VsdCIAEisKBUxvZ2luEgwuZ2FtZXNOLlVzZXIa",
-            "Ei5nYW1lc04uU2Vzc2lvbl9JZCIAEi4KBkxvZ291dBISLmdhbWVzTi5TZXNz",
-            "aW9uX0lkGg4uZ2FtZXNOLlJlc3VsdCIAQhgKEGlvLmdycGMuZXhhbXBsZXOi",
-            "AgNITFdiBnByb3RvMw=="));
+            "IAEoCRILCgNnaWQYAiABKAUiMwoHR2FtZVVJRBILCgN1aWQYASABKAkSDAoE",
+            "bmFtZRgCIAEoCRINCgVwcmljZRgDIAEoBSJCCglHYW1lSWRVaWQSCwoDdWlk",
+            "GAEgASgJEgsKA2dpZBgCIAEoBRIMCgRuYW1lGAMgASgJEg0KBXByaWNlGAQg",
+            "ASgFMq4CCgxHYW1lc0xpYnJhcnkSMAoIR2V0R2FtZXMSEi5nYW1lc04uU2Vz",
+            "c2lvbl9JZBoMLmdhbWVzTi5HYW1lIgAwARIxCgpNb2RpZnlHYW1lEhEuZ2Ft",
+            "ZXNOLkdhbWVJZFVpZBoOLmdhbWVzTi5SZXN1bHQiABIsCgdBZGRHYW1lEg8u",
+            "Z2FtZXNOLkdhbWVVSUQaDi5nYW1lc04uUmVzdWx0IgASLgoKRGVsZXRlR2Ft",
+            "ZRIOLmdhbWVzTi5HYW1lSUQaDi5nYW1lc04uUmVzdWx0IgASKwoFTG9naW4S",
+            "DC5nYW1lc04uVXNlchoSLmdhbWVzTi5TZXNzaW9uX0lkIgASLgoGTG9nb3V0",
+            "EhIuZ2FtZXNOLlNlc3Npb25fSWQaDi5nYW1lc04uUmVzdWx0IgBCGAoQaW8u",
+            "Z3JwYy5leGFtcGxlc6ICA0hMV2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -46,7 +47,8 @@ namespace GamesN {
             new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.Result), global::GamesN.Result.Parser, new[]{ "Success" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.Game), global::GamesN.Game.Parser, new[]{ "Gid", "Name", "Price" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.GameID), global::GamesN.GameID.Parser, new[]{ "Id", "Gid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.GameUID), global::GamesN.GameUID.Parser, new[]{ "Uid", "GID", "Name", "Price" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.GameUID), global::GamesN.GameUID.Parser, new[]{ "Uid", "Name", "Price" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GamesN.GameIdUid), global::GamesN.GameIdUid.Parser, new[]{ "Uid", "Gid", "Name", "Price" }, null, null, null)
           }));
     }
     #endregion
@@ -690,12 +692,12 @@ namespace GamesN {
 
     /// <summary>Field number for the "id" field.</summary>
     public const int IdFieldNumber = 1;
-    private int id_;
+    private string id_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id {
+    public string Id {
       get { return id_; }
       set {
-        id_ = value;
+        id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -731,7 +733,7 @@ namespace GamesN {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Id.Length != 0) hash ^= Id.GetHashCode();
       if (Gid != 0) hash ^= Gid.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -746,9 +748,9 @@ namespace GamesN {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Id);
+      if (Id.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Id);
       }
       if (Gid != 0) {
         output.WriteRawTag(16);
@@ -762,8 +764,8 @@ namespace GamesN {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      if (Id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
       }
       if (Gid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Gid);
@@ -779,7 +781,7 @@ namespace GamesN {
       if (other == null) {
         return;
       }
-      if (other.Id != 0) {
+      if (other.Id.Length != 0) {
         Id = other.Id;
       }
       if (other.Gid != 0) {
@@ -796,8 +798,8 @@ namespace GamesN {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Id = input.ReadInt32();
+          case 10: {
+            Id = input.ReadString();
             break;
           }
           case 16: {
@@ -836,7 +838,6 @@ namespace GamesN {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GameUID(GameUID other) : this() {
       uid_ = other.uid_;
-      gID_ = other.gID_;
       name_ = other.name_;
       price_ = other.price_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -858,14 +859,200 @@ namespace GamesN {
       }
     }
 
-    /// <summary>Field number for the "gID" field.</summary>
-    public const int GIDFieldNumber = 2;
-    private int gID_;
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int GID {
-      get { return gID_; }
+    public string Name {
+      get { return name_; }
       set {
-        gID_ = value;
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "price" field.</summary>
+    public const int PriceFieldNumber = 3;
+    private int price_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Price {
+      get { return price_; }
+      set {
+        price_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameUID);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameUID other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Uid != other.Uid) return false;
+      if (Name != other.Name) return false;
+      if (Price != other.Price) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Uid.Length != 0) hash ^= Uid.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Price != 0) hash ^= Price.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Uid.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Uid);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (Price != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Price);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Uid.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Uid);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Price != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Price);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameUID other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Uid.Length != 0) {
+        Uid = other.Uid;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Price != 0) {
+        Price = other.Price;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Uid = input.ReadString();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 24: {
+            Price = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameIdUid : pb::IMessage<GameIdUid> {
+    private static readonly pb::MessageParser<GameIdUid> _parser = new pb::MessageParser<GameIdUid>(() => new GameIdUid());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameIdUid> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::GamesN.GameNReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameIdUid() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameIdUid(GameIdUid other) : this() {
+      uid_ = other.uid_;
+      gid_ = other.gid_;
+      name_ = other.name_;
+      price_ = other.price_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameIdUid Clone() {
+      return new GameIdUid(this);
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 1;
+    private string uid_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Uid {
+      get { return uid_; }
+      set {
+        uid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "gid" field.</summary>
+    public const int GidFieldNumber = 2;
+    private int gid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Gid {
+      get { return gid_; }
+      set {
+        gid_ = value;
       }
     }
 
@@ -893,11 +1080,11 @@ namespace GamesN {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GameUID);
+      return Equals(other as GameIdUid);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GameUID other) {
+    public bool Equals(GameIdUid other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -905,7 +1092,7 @@ namespace GamesN {
         return true;
       }
       if (Uid != other.Uid) return false;
-      if (GID != other.GID) return false;
+      if (Gid != other.Gid) return false;
       if (Name != other.Name) return false;
       if (Price != other.Price) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -915,7 +1102,7 @@ namespace GamesN {
     public override int GetHashCode() {
       int hash = 1;
       if (Uid.Length != 0) hash ^= Uid.GetHashCode();
-      if (GID != 0) hash ^= GID.GetHashCode();
+      if (Gid != 0) hash ^= Gid.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Price != 0) hash ^= Price.GetHashCode();
       if (_unknownFields != null) {
@@ -935,9 +1122,9 @@ namespace GamesN {
         output.WriteRawTag(10);
         output.WriteString(Uid);
       }
-      if (GID != 0) {
+      if (Gid != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(GID);
+        output.WriteInt32(Gid);
       }
       if (Name.Length != 0) {
         output.WriteRawTag(26);
@@ -958,8 +1145,8 @@ namespace GamesN {
       if (Uid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Uid);
       }
-      if (GID != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GID);
+      if (Gid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Gid);
       }
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
@@ -974,15 +1161,15 @@ namespace GamesN {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GameUID other) {
+    public void MergeFrom(GameIdUid other) {
       if (other == null) {
         return;
       }
       if (other.Uid.Length != 0) {
         Uid = other.Uid;
       }
-      if (other.GID != 0) {
-        GID = other.GID;
+      if (other.Gid != 0) {
+        Gid = other.Gid;
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
@@ -1006,7 +1193,7 @@ namespace GamesN {
             break;
           }
           case 16: {
-            GID = input.ReadInt32();
+            Gid = input.ReadInt32();
             break;
           }
           case 26: {
