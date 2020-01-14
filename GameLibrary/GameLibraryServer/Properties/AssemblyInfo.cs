@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GLServer")]
+[assembly: AssemblyTitle("GameLibraryServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GLServer")]
+[assembly: AssemblyProduct("GameLibraryServer")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("55222c19-8816-41e7-8042-0137ad4ef12f")]
+[assembly: Guid("5ab9bf3e-adce-4337-8357-3dcdb033fc1a")]
 
 // Version information for an assembly consists of the following four values:
 //

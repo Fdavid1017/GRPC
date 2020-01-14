@@ -10,26 +10,26 @@ using System.Windows.Forms;
 using Grpc.Core;
 using GamesN;
 
-namespace GLClient
+namespace GameLibraryClient
 {
     public partial class Form1 : Form
     {
-        static Channel channel = new Channel("127.0.0.1:50052", ChannelCredentials.Insecure);
+        static Channel channel = new Channel("127.0.0.1:1234", ChannelCredentials.Insecure);
         GamesLibrary.GamesLibraryClient client = new GamesLibrary.GamesLibraryClient(channel);
-        Session_Id guid = new Session_Id();
+        Session_Id guid;
 
         public Form1()
         {
             InitializeComponent();
+            guid = new Session_Id();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            // client = GamesLibrary.NewClient(channel);
             User user = new User(); user.Name = "u"; user.Passwd = "p";
             Session_Id guid = new Session_Id();
             guid = client.Login(user);
-            MessageBox.Show(guid.Id);
+            MessageBox.Show("Logged in\nSessiond id:\n" + guid.Id);
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace GLClient
             MessageBox.Show(res.Success);
         }
 
-        private async void GetAllGamesButton_Click(object sender, EventArgs e)
+        private async void GetAllButton_Click(object sender, EventArgs e)
         {
             resultLabel.Text = "All Games:";
             IAsyncStreamReader<Game> response = client.GetGames(guid).ResponseStream;
