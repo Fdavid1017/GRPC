@@ -123,7 +123,7 @@ namespace GameLibraryServer
                     var cmd = new MySqlCommand(query, gameDatabase.Connection);
                     var reader = cmd.ExecuteReader();
                     int count = 0;
-                    while (reader.Read() && count < 2)
+                    while (reader.Read() && count < 3)
                     {
                         count++;
                     }
